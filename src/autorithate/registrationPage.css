@@ -1,0 +1,29 @@
+.inputLine{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 20px;
+}
+.allInputLines{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 937px;
+}
+.linkToAutorithate{
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    border: solid blue 1px;
+    padding: 5px;
+    color: blue;
+}
+.linkToAutorithate:active{
+    border: solid rgb(0, 153, 255) 1px;
+    color: rgb(0, 153, 255);
+}
