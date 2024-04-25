@@ -1,0 +1,18 @@
+.users{
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.users-element{
+    margin: 0px;
+    padding:5px;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    border:1px solid black;
+}
+
+.users-element-line{
+    margin: 0px;
+    padding:0px;
+}

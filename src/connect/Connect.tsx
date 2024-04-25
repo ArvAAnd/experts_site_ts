@@ -21,7 +21,7 @@ export const Connect = {
         return axios.delete('http://127.0.0.1:5000/clear_table');
     },
     async axiosUpdate(data: UserT) {
-        return axios.post('http://127.0.0.1:5000/update/c', {
+        return axios.post('http://127.0.0.1:5000/update/cPlus', {
             'data': data 
         });
     }

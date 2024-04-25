@@ -18,23 +18,32 @@ export const useRegistration = () => {
 
   const {user, signIn} = useUserStore()
   const navigate = useNavigate()
+
+  const goBack = () => {
+    navigate(routes.home)
+  }
   const onSubmit = async(data: UserT) => {
     try{
-      signIn({...data})
-      
+           
       const response = await Connect.axiosPost({...data, "c++":false})
+
+      if(response.data.massage != "Nevdalo") {
+        signIn({...data})       
+        goBack()
+      } 
+      else alert("Users with this name already exist") 
+        
       //console.log(response)
       //console.log(data, user)
-      navigate(routes.home)
     }catch{
-      alert("Can't to autorizate")
+      alert("Can't to registrate")
     }finally{}
   }
-  return {onSubmit, register, reset, handleSubmit}
+  return {onSubmit, register, reset, handleSubmit, goBack}
 }
 
 export function Registration(){
-    const {onSubmit, register, reset, handleSubmit} = useRegistration()
+    const {onSubmit, register, reset, handleSubmit, goBack} = useRegistration()
     return(
         <div className="main">
         <form onSubmit={handleSubmit(onSubmit)} className="allInputLines">
@@ -57,6 +66,7 @@ export function Registration(){
         </div>
         <input type="submit" value="Autorizate"/>
       </form>
+      <button onClick={goBack}>Back</button>
     </div>
     )
 }
