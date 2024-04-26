@@ -1,16 +1,16 @@
 import React from "react";
 import axios from "axios";
-import { UserT } from "../types/user";
+import { Theme, UserAndTheme, UserT } from "../types/user";
 const url = 'http://127.0.0.1:5000/api/registration'
 //const testUrl = 'https://httpbin.org/post'
 
 export const Connect = {
-    async axiosPost(data: UserT) {
+    async axiosAddUser(data: UserT) {
         return axios.post(url, {
             'data': data
         });
     },
-    async axiosGet() {
+    async axiosGetUser() {
         return axios.get('http://127.0.0.1:5000/get_users');
     },
     async axiosDelete(user_id: number) {
@@ -20,9 +20,17 @@ export const Connect = {
     async axiosClear() {
         return axios.delete('http://127.0.0.1:5000/clear_table');
     },
-    async axiosUpdate(data: UserT) {
-        return axios.post('http://127.0.0.1:5000/update/cPlus', {
+    async axiosAddTheme(data: Theme) {
+        return axios.post('http://127.0.0.1:5000/add-theme', {
             'data': data 
+        });
+    },
+    async axiosGetTheme() {
+        return axios.get('http://127.0.0.1:5000/get_themes');
+    },
+    async axiosStayExpert(data: UserAndTheme) {
+        return axios.post('http://127.0.0.1:5000/stay_expert', {
+            'data': data
         });
     }
 };

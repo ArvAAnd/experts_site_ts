@@ -16,23 +16,21 @@ export const useUsersShow = () => {
     //     ) : alert("")
     // }
   
-    const changeC = async() => {
-      // const {user, signIn} = useUserStore();
+  //   const changeC = async() => {
+  //     const {user, signIn} = useUserStore();
   
-      if(user){
+  //     if(user){
         
-          signIn({...user, "c++":!user["c++"]})
-          console.log({...user, "c++":!user["c++"]})
-          const response = await Connect.axiosUpdate({...users.filter(el => el.name === user.name)[0], "c++":!user["c++"]})  
-          console.log(response.data.message)  
-          console.log({...users.filter(el => el.name === user.name)[0], "c++":!user["c++"]})
-          setChanged(chanhed => !chanhed)
-      }
-  }
+  //       const response = await Connect.axiosUpdate({...users.filter(el => el.name === user.name)[0], "c++":!user["c++"]})  
+  //       console.log(response.data.message)  
+  //       console.log({...users.filter(el => el.name === user.name)[0], "c++":!user["c++"]})
+  //       setChanged(chanhed => !chanhed)
+  //     }
+  // }
     
   
     const get_users = async() => {
-      const response = await Connect.axiosGet()
+      const response = await Connect.axiosGetUser()
       console.log(response.data)
       setUsers(response.data)
     }
@@ -45,6 +43,6 @@ export const useUsersShow = () => {
   
     
   
-    return {user, signOut, users, changeC}
+    return {user, signOut, users}
   }
   

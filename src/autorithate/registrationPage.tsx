@@ -25,7 +25,7 @@ export const useRegistration = () => {
   const onSubmit = async(data: UserT) => {
     try{
            
-      const response = await Connect.axiosPost({...data, "c++":false})
+      const response = await Connect.axiosAddUser({...data})
 
       if(response.data.massage != "Nevdalo") {
         signIn({...data})       

@@ -11,7 +11,7 @@ export const UsersShow = () => {
                     <p className="users-element-line">Key: {userD.id}</p>
                     <p className="users-element-line">Name: {userD.name}</p>
                     <p className="users-element-line">Password: {userD.password}</p>
-                    <p className="users-element-line">C++: {(userD["c++"] == true) ? "yes" : "no"}</p>
+                    {/* <p className="users-element-line">C++: {(userD["c++"] == true) ? "yes" : "no"}</p> */}
                 </div>
             })}
       </div>

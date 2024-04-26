@@ -16,3 +16,14 @@
     margin: 0px;
     padding:0px;
 }
+
+.user-status{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.links{
+    display: flex;
+    gap: 10px;
+}
