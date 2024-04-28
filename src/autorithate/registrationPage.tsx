@@ -6,6 +6,7 @@ import { UserT } from "../types/user"
 import {useUserStore} from "../store/userStore"
 import { routes } from "../Routers"
 import { Connect } from "../connect/Connect"
+import { useThemesUpdateStore } from "../store/themeUpdateStore"
 
 export const useRegistration = () => {
   const {
@@ -14,21 +15,22 @@ export const useRegistration = () => {
     reset
   }= useForm<UserT>()
 
-  
+  const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
 
   const {user, signIn} = useUserStore()
   const navigate = useNavigate()
 
   const goBack = () => {
-    navigate(routes.home)
+    navigate(routes.pick_theme)
   }
   const onSubmit = async(data: UserT) => {
     try{
-           
+      setThemesUpdate(!themesUpdate)
       const response = await Connect.axiosAddUser({...data})
 
       if(response.data.massage != "Nevdalo") {
-        signIn({...data})       
+        signIn({...response.data})   
+        //console.log(response.data)    
         goBack()
       } 
       else alert("Users with this name already exist") 

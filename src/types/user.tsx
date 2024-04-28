@@ -16,6 +16,12 @@ export type UserFromServerT = {
 }
 
 export type UserAndTheme = {
+    id: number,
+    user_id: number,
+    theme_id: number
+}
+
+export type UserAndThemeForServerT = {
     user_id: number,
     theme_id: number
 }

@@ -5,6 +5,9 @@ import { Theme } from "../types/user";
 import { useSelectedTheme } from "../store/selectedTheme";
 import { Connect } from "../connect/Connect";
 import { useUserStore } from "../store/userStore";
+import { useThemesUpdateStore } from "../store/themeUpdateStore";
+import { useNavigate } from "react-router";
+import { routes } from "../Routers";
 
 type GetId = {
     themeId: number
@@ -13,14 +16,17 @@ type GetId = {
 export const ThemesShow = () => {
     const {themes} = useThemesShow();
     const {user} = useUserStore();
+    const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
     const {
         register,
         handleSubmit
     } = useForm<GetId>();
-
+    const navigate = useNavigate();
     const onSumbit = async(data: GetId) => {
         const response = await Connect.axiosStayExpert({ user_id: user ? user.id : 0, theme_id: data.themeId});
-        console.log(response.data.message)
+        setThemesUpdate(!themesUpdate);
+        navigate(routes.home)
+        //console.log(response.data.message)
     }
 
     return(

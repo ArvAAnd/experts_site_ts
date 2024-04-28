@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Theme, UserAndTheme, UserT } from "../types/user";
+import { Theme, UserAndTheme, UserAndThemeForServerT, UserT } from "../types/user";
 const url = 'http://127.0.0.1:5000/api/registration'
 //const testUrl = 'https://httpbin.org/post'
 
@@ -28,9 +28,12 @@ export const Connect = {
     async axiosGetTheme() {
         return axios.get('http://127.0.0.1:5000/get_themes');
     },
-    async axiosStayExpert(data: UserAndTheme) {
+    async axiosStayExpert(data: UserAndThemeForServerT) {
         return axios.post('http://127.0.0.1:5000/stay_expert', {
             'data': data
         });
+    },
+    async axiosGetExperts() {
+        return axios.get('http://127.0.0.1:5000/get_experts');
     }
 };

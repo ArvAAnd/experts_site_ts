@@ -14,15 +14,16 @@ import { AddTheme } from "../autorithate/AddTheme";
 
 
 export const Home = () => {
+  
   //const [addTheme, setAddTheme] = useState(false)
   return(
     <div>
-    <div>
-      <ShowCurrenUser />
-      <UsersShow />
-    </div>
+      <div>
+        <ShowCurrenUser />
+        <UsersShow />
+      </div>
+      
       <AddTheme />
-      <ThemesShow/>
     </div>
   )
 }

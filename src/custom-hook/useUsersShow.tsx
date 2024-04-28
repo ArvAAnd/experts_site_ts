@@ -4,12 +4,13 @@ import { Connect } from "../connect/Connect";
 import { UserFromServerT, UserT } from "../types/user";
 import { useUsersStore } from "../store/usersStore";
 import { UsersShow } from "../home/usersShow";
+import { useThemesUpdateStore } from "../store/themeUpdateStore";
 
 
 export const useUsersShow = () => {
     const {signOut, user, signIn} = useUserStore();
     const {users, setUsers} = useUsersStore()
-    const [chanhed, setChanged] = useState(false)
+    const {themesUpdate} = useThemesUpdateStore();
     // const stayC = () => {
     //   user ? (
     //     signIn({...user, "c++":true})
@@ -31,18 +32,15 @@ export const useUsersShow = () => {
   
     const get_users = async() => {
       const response = await Connect.axiosGetUser()
-      console.log(response.data)
+      //console.log(response.data)
       setUsers(response.data)
     }
   
     useEffect(() => {
       get_users()
-    },[chanhed])
+    },[themesUpdate])
   
   
-  
-    
-  
-    return {user, signOut, users}
+    return {user, signIn, signOut, users}
   }
   

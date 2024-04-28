@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useUsersShow } from "../custom-hook/useUsersShow";
 import { Link } from "react-router-dom";
 import { routes } from "../Routers";
+import { useThemesUpdateStore } from "../store/themeUpdateStore";
 
 export const ShowCurrenUser = () => {
-    const {user, signOut, users} = useUsersShow();
-
+    const {user, signIn, signOut, users} = useUsersShow();
+    const {themesUpdate} = useThemesUpdateStore();
+    useEffect(() => {
+        try{
+        user != undefined && signIn({...users.filter(el => el.name === user.name && el.password === user.password)[0]})
+        
+        }catch(err){
+            console.log("Haven't user")
+            console.error(err)
+        }
+    }, [])
+    
     return (
         <div className="user-status">
             {user?.name ? <>

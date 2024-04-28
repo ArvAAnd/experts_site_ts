@@ -1,25 +1,24 @@
 import React, { useEffect } from "react";
-import { useThemesStore } from "../store/themesStore";
+import { useExpertsStore } from "../store/expertsStore";
 import { Connect } from "../connect/Connect";
 import { useThemesUpdateStore } from "../store/themeUpdateStore";
 
-export const useThemesShow = () => {
-    const { themes, setThemes } = useThemesStore();
+export const useExpertsShow = () => {
+    const { experts, setStayExpert } = useExpertsStore();
     const { themesUpdate } = useThemesUpdateStore();
 
-    const getThemes = async () => {
-        const response = await Connect.axiosGetTheme();
+    const getExperts = async () => {
+        const response = await Connect.axiosGetExperts();
         //console.log(response)
-        setThemes(response.data);
+        setStayExpert(response.data);
     }
-
     useEffect(() => {
-        getThemes();
+        getExperts();
     }, [themesUpdate])
 
     return (
         {
-            themes
+            experts
         }
     )
 }
