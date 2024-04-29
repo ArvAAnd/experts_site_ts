@@ -3,34 +3,35 @@ import { useUsersShow } from "../custom-hook/useUsersShow";
 import { Link } from "react-router-dom";
 import { routes } from "../Routers";
 import { useThemesUpdateStore } from "../store/themeUpdateStore";
+import { useChangedModeStore } from "../store/changedMode";
 
 export const ShowCurrenUser = () => {
     const {user, signIn, signOut, users} = useUsersShow();
     const {themesUpdate} = useThemesUpdateStore();
-    useEffect(() => {
-        try{
-        user != undefined && signIn({...users.filter(el => el.name === user.name && el.password === user.password)[0]})
-        
-        }catch(err){
-            console.log("Haven't user")
-            console.error(err)
-        }
-    }, [])
+    const {changedMode, setChangedMode} = useChangedModeStore();
     
+    const Logout = ()=> {
+        signOut();
+        setChangedMode(false)
+        }
+
     return (
         <div className="user-status">
             {user?.name ? <>
                 <h1>
                 Welcome, {user.name}!
                 </h1>
-                <button onClick={signOut}>Logout</button>
+                <Link to={routes.pick_theme} onClick={() => setChangedMode(true)}>To pick theme</Link>
+                <button onClick={Logout}>Logout</button>
                 </> : <>
                 <h1>Registrate or autorizate pls</h1>
                 <div className="links">
                     <Link to={routes.registration}>To registrate</Link>
                     <Link to={routes.autorithation}>To autorithate</Link>
+                    
+                    
                 </div>
-                {/* <button onClick={()=>signIn({name: "Max", password: "lox"})}>Authorization</button> */}
+                
                 </>
             }
           

@@ -35,5 +35,19 @@ export const Connect = {
     },
     async axiosGetExperts() {
         return axios.get('http://127.0.0.1:5000/get_experts');
+    },
+    async axiosDeleteExpert(user_id: number) {
+        return axios.delete(`http://127.0.0.1:5000/delete_expert/${user_id}`);
+    },
+    async axiosStayInterested(data: UserAndThemeForServerT) {
+        return axios.post('http://127.0.0.1:5000/stay_interested', {
+            'data': data
+        });
+    },
+    async axiosGetInteresteds() {
+        return axios.get('http://127.0.0.1:5000/get_interesteds');
+    },
+    async axiosDeleteInterested(user_id: number) {
+        return axios.delete(`http://127.0.0.1:5000/delete_interested/${user_id}`);
     }
 };
