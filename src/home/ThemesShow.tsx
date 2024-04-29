@@ -37,14 +37,14 @@ export const ThemesShow = () => {
             const responseExpert = await Connect.axiosDeleteExpert(user ? user.id : 0)
             console.log("Experts: " + responseExpert.data.message)
             const responseInterested = await Connect.axiosDeleteInterested(user ? user.id : 0)
-            console.log("Interested: " + responseInterested.data.message)
+            //console.log("Interested: " + responseInterested.data.message)
         }
         data.themesIdExpert.map(async(themeId) => {
             const responseExpertStay = await Connect.axiosStayExpert({ user_id: user ? user.id : 0, theme_id: themeId})
         })
         data.themesIdInterested.map(async(themeId) => {
             const responseInterestedStay = await Connect.axiosStayInterested({ user_id: user ? user.id : 0, theme_id: themeId})
-            console.log(responseInterestedStay.data)
+            //console.log(responseInterestedStay.data)
         })
         setThemesUpdate(!themesUpdate);
         navigate(routes.home)

@@ -7,6 +7,7 @@ export const useThemesShow = () => {
     const { themes, setThemes } = useThemesStore();
     const { themesUpdate } = useThemesUpdateStore();
 
+    
     const getThemes = async () => {
         const response = await Connect.axiosGetTheme();
         //console.log(response)

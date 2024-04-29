@@ -25,16 +25,17 @@ export const useRegistration = () => {
   }
   const onSubmit = async(data: UserT) => {
     try{
-      setThemesUpdate(!themesUpdate)
+      
       const response = await Connect.axiosAddUser({...data})
 
       if(response.data.massage != "Nevdalo") {
         signIn({...response.data})   
         //console.log(response.data)    
+        setThemesUpdate(!themesUpdate)
         goBack()
       } 
       else alert("Users with this name already exist") 
-        
+      
       //console.log(response)
       //console.log(data, user)
     }catch{
