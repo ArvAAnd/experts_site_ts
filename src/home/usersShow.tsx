@@ -11,9 +11,7 @@ export const UsersShow = () => {
     //const {themes} = useThemesShow();
     const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
     
-    useEffect(() => {
-        console.log("Experts: " + experts)
-    }, [])
+    
     
     return(
         <div className="users">
