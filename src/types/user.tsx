@@ -12,7 +12,9 @@ export type UserRegistrationT = {
 export type UserFromServerT = {
     id: number,
     name: string,
-    password: string
+    password: string,
+    experts: string[]
+    interests: string[]
 }
 
 export type UserAndTheme = {

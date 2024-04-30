@@ -21,7 +21,7 @@ export const useRegistration = () => {
   const navigate = useNavigate()
 
   const goBack = () => {
-    navigate(routes.pick_theme)
+    navigate(routes.home)
   }
   const onSubmit = async(data: UserT) => {
     try{
@@ -31,8 +31,7 @@ export const useRegistration = () => {
       if(response.data.massage != "Nevdalo") {
         signIn({...response.data})   
         //console.log(response.data)    
-        setThemesUpdate(!themesUpdate)
-        goBack()
+        navigate(routes.pick_theme)
       } 
       else alert("Users with this name already exist") 
       
