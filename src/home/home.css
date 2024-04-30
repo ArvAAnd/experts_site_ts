@@ -30,3 +30,6 @@
 .themes-element{
     display: flex;
 }
+.user-expert{
+    display: flex;
+gap: 10px}
