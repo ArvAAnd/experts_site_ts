@@ -10,6 +10,8 @@ import { routes } from "../Routers";
 import { useChangedModeStore } from "../store/changedMode";
 import { useUsersShow } from "../custom-hook/useUsersShow";
 import { useUsersStore } from "../store/usersStore";
+import { Select, Space } from 'antd';
+import type { SelectProps } from 'antd';
 
 type GetId = {
     themesIdExpert: number[],
@@ -30,6 +32,13 @@ export const ThemesShow = () => {
         getValues
     } = useForm<GetId>();
 
+    const options: SelectProps['options'] = [];
+    try{
+        themes?.map((themeElem) => {
+            options.push({ label: themeElem.name, value: themeElem.id })
+        })}catch{
+            console.log("Error")
+        }
     const defaultForExpert = (themeElem: ThemeFromServerT) => {
         if(changedMode===true){
             const defalt = users.filter(userD => userD.id === user?.id)[0].experts.map((expert) => expert[0]).flat().includes(themeElem.name)
@@ -50,30 +59,24 @@ export const ThemesShow = () => {
 
     const navigate = useNavigate();
     const onSubmit = async(data: GetId) => {
-        //console.log(data.themesIdExpert)
-        //console.log(data.themesIdInterested)
-        if(changedMode === true){
-            const responseExpert = await Connect.axiosDeleteExpert(user ? user.id : 0)
-            console.log("Experts: " + responseExpert.data.message)
-            const responseInterested = await Connect.axiosDeleteInterested(user ? user.id : 0)
-            console.log("Interested: " + responseInterested.data.message)
-        }
-        await Promise.all(data.themesIdExpert.map(async(themeId) => {
-            const responseExpertStay = await Connect.axiosStayExpert({ user_id: user ? user.id : 0, theme_id: themeId})
-        }))
-        await Promise.all(data.themesIdInterested.map(async(themeId) => {
-            const responseInterestedStay = await Connect.axiosStayInterested({ user_id: user ? user.id : 0, theme_id: themeId})
-            console.log(responseInterestedStay.data)
-        }))
+        console.log(data)
+        
+        // const response = await Connect.axiosStayExpertOrInterested(
+        //     { 
+        //         changeMode: changedMode,
+        //         user_id: user ? user.id : 0, 
+        //         themesIdExpert: data.themesIdExpert, 
+        //         themesIdInterested: data.themesIdInterested
+        //     }
+        // )
         setThemesUpdate(!themesUpdate);
-        navigate(routes.home)
+        //navigate(routes.home)
     
-        //console.log(response.data.message)
     }
 
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
+            {/* <div>
                 Expert:
             {themes?.map((themeElem) => (
                 <div className="themes-element" key={themeElem.id}>
@@ -96,7 +99,15 @@ export const ThemesShow = () => {
                 <p>{themeElem.name}</p>
                 </div>
             ))}
-            </div>
+            </div> */}
+            <Select
+                mode="multiple"
+                placeholder="Please select"
+                style={{ width: '100%' }}
+                {...register('themesIdExpert')}
+                // defaultValue={}
+                options={options}
+                />
             <button type="submit">Submit</button>
         </form>
     )

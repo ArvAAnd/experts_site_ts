@@ -22,11 +22,11 @@ export const UsersShow = () => {
                     <p className="users-element-line">Password: {userD.password}</p>
                     {userD?.experts?.length > 0 && <p className="users-element-line">Experts:</p>}
                     { userD?.experts?.length > 0 && userD.experts.map((expert) => {
-                        return <p className="users-element-line">{expert}</p>
+                        return <p key={expert} className="users-element-line">{expert}</p>
                     })}
                     { userD?.interests?.length > 0 && <p className="users-element-line">Interested:</p>}
                     { userD?.interests?.length > 0 && userD.interests.map((interested) => {
-                        return <p className="users-element-line">{interested}</p>
+                        return <p key={interested} className="users-element-line">{interested}</p>
                     })}
                     {/* { experts.filter(el => el.user_id === userD.id).map((expert) => {
                         return <p key={expert.id}>Experts: { themes.filter(el => el.id === expert.theme_id).length > 0 &&

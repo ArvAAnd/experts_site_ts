@@ -36,3 +36,10 @@ export type ThemeFromServerT = {
     id: number,
     name: string
 }
+
+export type ExpertAndInterestedForServerT = {
+    changeMode: boolean,
+    user_id: number,
+    themesIdExpert: number[],
+    themesIdInterested: number[]
+}

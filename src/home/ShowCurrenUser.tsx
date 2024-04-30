@@ -23,12 +23,12 @@ export const ShowCurrenUser = () => {
                 </h1>
                 {users.filter(userD => userD.id === user.id)[0]?.experts?.length > 0 && <div className="user-expert">Experts:
                     {users.filter(userD => userD.id === user.id)[0]?.experts?.map((expert) => {
-                        return <p className="users-element-line">{expert}</p>
+                        return <p key={expert} className="users-element-line">{expert}</p>
                     })}
                     </div>}
                 {users.filter(userD => userD.id === user.id)[0]?.interests?.length > 0 && <div className="user-expert">Interested:
                     {users.filter(userD => userD.id === user.id)[0]?.interests?.map((interested) => {
-                        return <p className="users-element-line">{interested}</p>
+                        return <p key={interested} className="users-element-line">{interested}</p>
                     })}
                     </div>}
                 <Link to={routes.pick_theme} onClick={() => setChangedMode(true)}>To pick theme</Link>
