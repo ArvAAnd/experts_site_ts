@@ -25,53 +25,82 @@ export const ThemesShow = () => {
     const {changedMode} = useChangedModeStore();
     const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
     //const {experts} = useExpertsShow();
-    const {users} = useUsersStore();
+    const {users} = useUsersShow();
     const {
         register,
+        reset,
         handleSubmit,
         getValues
-    } = useForm<GetId>();
+    } = useForm<GetId>({
+        defaultValues: {themesIdExpert: [], themesIdInterested: []},
+    });
 
     const options: SelectProps['options'] = [];
     try{
         themes?.map((themeElem) => {
+            if(themeElem.name !== undefined){
             options.push({ label: themeElem.name, value: themeElem.id })
+        }
         })}catch{
             console.log("Error")
         }
-    const defaultForExpert = (themeElem: ThemeFromServerT) => {
+    const defaultForExpert = () => {
         if(changedMode===true){
-            const defalt = users.filter(userD => userD.id === user?.id)[0].experts.map((expert) => expert[0]).flat().includes(themeElem.name)
-            console.log()
-            return defalt
+            try{
+                const defalt = users?.filter(userD => userD.id === user?.id)[0].experts?.map((expert) => themes?.filter((el) => el.name===expert[0])[0].id).flat()
+                return defalt
+            }catch(err){
+                console.error(err)
+                return []
+            }
         }
-        else return false
+        else return []
     }
 
-    const defaultForInterested = (themeElem: ThemeFromServerT) => {
-        if(changedMode===true){
-        const defalt = users.filter(userD => userD.id === user?.id)[0].interests.map((interested) => interested[0]).flat().includes(themeElem.name)
-        console.log()
-        return defalt
+    const handleSubmitExpert = (values: number[]) => {
+            console.log(values)
+            values.map((valueD) => register(`themesIdExpert.${valueD}`, {value: valueD}))
         }
-        else return false
+
+    const defaultForInterested = () => {
+        if(changedMode===true){
+            try{
+                if(user!==undefined){
+                    const defalt = users?.filter(userD => userD.id === user?.id)[0].experts?.map((expert) => themes?.filter((el) => el.name===expert[0])[0].id).flat()
+                    console.log(defalt)
+                    const defalt1 = defalt
+                    return defalt1
+                }
+            }catch(err){
+                console.error(err)
+                return []
+            }
+        }
+        else return []
     }
+    // const defaultForInterested = (themeElem: ThemeFromServerT) => {
+    //     if(changedMode===true){
+    //     const defalt = users.filter(userD => userD.id === user?.id)[0].interests.map((interested) => interested[0]).flat().includes(themeElem.name)
+    //     console.log()
+    //     return defalt
+    //     }
+    //     else return false
+    // }
 
     const navigate = useNavigate();
     const onSubmit = async(data: GetId) => {
         console.log(data)
-        
-        // const response = await Connect.axiosStayExpertOrInterested(
-        //     { 
-        //         changeMode: changedMode,
-        //         user_id: user ? user.id : 0, 
-        //         themesIdExpert: data.themesIdExpert, 
-        //         themesIdInterested: data.themesIdInterested
-        //     }
-        // )
+        const response = await Connect.axiosStayExpertOrInterested(
+            { 
+                changeMode: changedMode,
+                user_id: user ? user.id : 0, 
+                themesIdExpert: data.themesIdExpert, 
+                themesIdInterested: data.themesIdInterested
+            }
+        )
+        reset()
         setThemesUpdate(!themesUpdate);
-        //navigate(routes.home)
-    
+        navigate(routes.home)
     }
 
     return(
@@ -104,8 +133,20 @@ export const ThemesShow = () => {
                 mode="multiple"
                 placeholder="Please select"
                 style={{ width: '100%' }}
-                {...register('themesIdExpert')}
-                // defaultValue={}
+                allowClear
+                onChange={handleSubmitExpert}
+                defaultValue={defaultForExpert()}
+                options={options}
+                />
+            <Select
+                mode="multiple"
+                placeholder="Please select"
+                style={{ width: '100%' }}
+                allowClear
+                onChange={(values: number[]) => {
+                    values.map((valueD) => register(`themesIdInterested.${valueD}`, {value: valueD}))
+                }}
+                defaultValue={defaultForInterested()}
                 options={options}
                 />
             <button type="submit">Submit</button>
