@@ -1,7 +1,9 @@
 export type UserT = {
     id: number,
     name: string,
-    password: string
+    password: string,
+    experts: string[] | null,
+    interesteds: string[] | null
 }
 
 export type UserRegistrationT = {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useThemesShow } from "../custom-hook/useThemesShow";
 import { useForm } from "react-hook-form";
 import { Theme, ThemeFromServerT } from "../types/user";
@@ -26,6 +26,8 @@ export const ThemesShow = () => {
     const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
     //const {experts} = useExpertsShow();
     const {users} = useUsersShow();
+    const [themeExpert, setThemeExpert] = useState<number[]>([]);
+    const [themeInterested, setThemeInterested] = useState<number[]>([]);
     const {
         register,
         reset,
@@ -59,7 +61,16 @@ export const ThemesShow = () => {
 
     const handleSubmitExpert = (values: number[]) => {
             console.log(values)
-            values.map((valueD) => register(`themesIdExpert.${valueD}`, {value: valueD}))
+            setThemeExpert(values)
+            
+            //values.map((valueD) => register(`themesIdExpert.${valueD}`, {value: valueD}))
+        }
+
+        const handleSubmitInterested = (values: number[]) => {
+            console.log(values)
+            setThemeInterested(values)
+            
+            //values.map((valueD) => register(`themesIdExpert.${valueD}`, {value: valueD}))
         }
 
     const defaultForInterested = () => {
@@ -68,8 +79,7 @@ export const ThemesShow = () => {
                 if(user!==undefined){
                     const defalt = users?.filter(userD => userD.id === user?.id)[0].experts?.map((expert) => themes?.filter((el) => el.name===expert[0])[0].id).flat()
                     console.log(defalt)
-                    const defalt1 = defalt
-                    return defalt1
+                    return defalt
                 }
             }catch(err){
                 console.error(err)
@@ -89,13 +99,13 @@ export const ThemesShow = () => {
 
     const navigate = useNavigate();
     const onSubmit = async(data: GetId) => {
-        console.log(data)
+        //console.log(data)
         const response = await Connect.axiosStayExpertOrInterested(
             { 
                 changeMode: changedMode,
                 user_id: user ? user.id : 0, 
-                themesIdExpert: data.themesIdExpert, 
-                themesIdInterested: data.themesIdInterested
+                themesIdExpert: themeExpert,
+                themesIdInterested: themeInterested
             }
         )
         reset()
@@ -143,9 +153,7 @@ export const ThemesShow = () => {
                 placeholder="Please select"
                 style={{ width: '100%' }}
                 allowClear
-                onChange={(values: number[]) => {
-                    values.map((valueD) => register(`themesIdInterested.${valueD}`, {value: valueD}))
-                }}
+                onChange={handleSubmitInterested}
                 defaultValue={defaultForInterested()}
                 options={options}
                 />
