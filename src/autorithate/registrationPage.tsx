@@ -29,6 +29,7 @@ export const useRegistration = () => {
       const response = await Connect.axiosAddUser({...data})
 
       if(response.data.massage != "Nevdalo") {
+        console.log(response.data)
         signIn({...response.data})   
         //console.log(response.data)    
         navigate(routes.pick_theme)

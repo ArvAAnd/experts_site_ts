@@ -23,12 +23,12 @@ export const ShowCurrenUser = () => {
                 </h1>
                 <div className="user-expert">Experts:
                     {user.experts?.map((expert) => {
-                        return <p key={expert} className="users-element-line">{expert}</p>
+                        return <p key={expert.name} className="users-element-line">{expert.name}</p>
                     })}
                 </div>
                 <div className="user-expert">Interested:
-                    {user.interesteds?.map((interested) => {
-                        return <p key={interested} className="users-element-line">{interested}</p>
+                    {user.interests?.map((interested) => {
+                        return <p key={interested.name} className="users-element-line">{interested.name}</p>
                     })}
                 </div>
                 <Link to={routes.pick_theme} onClick={() => setChangedMode(true)}>To pick theme</Link>

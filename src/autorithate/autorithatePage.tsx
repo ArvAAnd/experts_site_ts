@@ -1,11 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { UserT } from "../types/user";
+import { UserRegistrationT, UserT } from "../types/user";
 import { useUserStore } from "../store/userStore";
 import { useNavigate } from "react-router";
 import { routes } from "../Routers";
 import { useUsersStore } from "../store/usersStore";
 import { useUsersShow } from "../custom-hook/useUsersShow";
+import { Connect } from "../connect/Connect";
 
 export const Autorithation = () => {
     const {
@@ -22,15 +23,13 @@ export const Autorithation = () => {
         navigate(routes.home)
     }
 
-    const onSubmit = async(data: UserT) => {
+    const onSubmit = async(data: UserRegistrationT) => {
         try{
-            if(users.filter(el => el.name === data.name && el.password === data.password).length != 0){
-                signIn({...users.filter(el => el.name === data.name && el.password === data.password)[0]})
-                goBack()
-            }
-            else{
-                alert("User not found")
-            }
+            console.log(data)
+            const response = await Connect.axiosAuthorization(data)
+            console.log(response.data)
+            signIn({...response.data})
+            goBack()
         }catch{
             alert("Can't to autorizate")
         }

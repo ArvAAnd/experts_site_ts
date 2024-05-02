@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { ExpertAndInterestedForServerT, Theme, UserAndTheme, UserAndThemeForServerT, UserT } from "../types/user";
+import { ExpertAndInterestedForServerT, Theme, UserAndTheme, UserAndThemeForServerT, UserRegistrationT, UserT } from "../types/user";
 const url = 'http://127.0.0.1:5000/api/registration'
 //const testUrl = 'https://httpbin.org/post'
 
@@ -28,31 +28,17 @@ export const Connect = {
     async axiosGetTheme() {
         return axios.get('http://127.0.0.1:5000/get_themes');
     },
-    async axiosStayExpert(data: UserAndThemeForServerT) {
-        return axios.post('http://127.0.0.1:5000/stay_expert', {
-            'data': data
-        });
-    },
-    async axiosGetExperts() {
-        return axios.get('http://127.0.0.1:5000/get_experts');
-    },
     async axiosDeleteExpertAndInterested(user_id: number) {
         return axios.delete(`http://127.0.0.1:5000/delete_expert_and_interested/${user_id}`);
     },
-    // async axiosStayInterested(data: UserAndThemeForServerT) {
-    //     return axios.post('http://127.0.0.1:5000/stay_interested', {
-    //         'data': data
-    //     });
-    // },
-    // async axiosGetInteresteds() {
-    //     return axios.get('http://127.0.0.1:5000/get_interesteds');
-    // },
-    // async axiosDeleteInterested(user_id: number) {
-    //     return axios.delete(`http://127.0.0.1:5000/delete_interested/${user_id}`);
-    // },
     async axiosStayExpertOrInterested(data: ExpertAndInterestedForServerT) {
         return axios.post('http://127.0.0.1:5000/stay_expert_and_interested', {
             'data': data
         });
+    },
+    async axiosAuthorization(data: UserRegistrationT) {
+        return axios.post('http://127.0.0.1:5000/authorization', {
+            'data': data
+        })
     }
 };

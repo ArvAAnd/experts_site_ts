@@ -2,8 +2,14 @@ export type UserT = {
     id: number,
     name: string,
     password: string,
-    experts: string[] | null,
-    interesteds: string[] | null
+    experts: {
+        id: number,
+        name: string
+    }[] | null,
+    interests: {
+        id: number,
+        name: string
+    }[] | null
 }
 
 export type UserRegistrationT = {
@@ -15,8 +21,14 @@ export type UserFromServerT = {
     id: number,
     name: string,
     password: string,
-    experts: string[]
-    interests: string[]
+    experts: {
+        id: number,
+        name: string
+    }[]
+    interests: {
+        id: number,
+        name: string
+    }[]
 }
 
 export type UserAndTheme = {

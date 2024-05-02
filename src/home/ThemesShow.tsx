@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useThemesShow } from "../custom-hook/useThemesShow";
 import { useForm } from "react-hook-form";
 import { Theme, ThemeFromServerT } from "../types/user";
@@ -33,9 +33,7 @@ export const ThemesShow = () => {
         reset,
         handleSubmit,
         getValues
-    } = useForm<GetId>({
-        defaultValues: {themesIdExpert: [], themesIdInterested: []},
-    });
+    } = useForm<GetId>();
 
     const options: SelectProps['options'] = [];
     try{
@@ -46,48 +44,51 @@ export const ThemesShow = () => {
         })}catch{
             console.log("Error")
         }
+    // useEffect(() => {
+    //     try{
+    //         const defaltExpert = themes?.filter(el => user?.experts?.flat().includes(el.name)).map((el) => el.id)
+    //         setDefaultExpert(defaltExpert)
+    //         const defaltInteres = themes?.filter(el => user?.interests?.flat().includes(el.name)).map((el) => el.id)
+    //         setDefaultInterested(defaltInteres)
+    //     }catch(err){
+    //         console.error(err)
+    //     }
+    // }, []) 
+    useEffect(() => {
+        const defaltExpert = user?.experts?.map((expert) => expert.id).flat()
+        if(defaltExpert) setThemeExpert(defaltExpert)
+
+        const defaltInteres = user?.interests?.map((interested) => interested.id).flat()
+        if(defaltInteres) setThemeInterested(defaltInteres)
+    }, [])
     const defaultForExpert = () => {
         if(changedMode===true){
-            try{
-                const defalt = users?.filter(userD => userD.id === user?.id)[0].experts?.map((expert) => themes?.filter((el) => el.name===expert[0])[0].id).flat()
-                return defalt
-            }catch(err){
-                console.error(err)
-                return []
-            }
+            const defalt = user?.experts?.map((expert) => expert.id).flat()
+            return defalt
+        }
+        else return []
+    }
+    const defaultForInterested = () => {
+        if(changedMode===true){
+            //console.log(user?.experts?.map((expert) => expert.id).flat())
+            return user?.interests?.map((interested) => interested.id).flat()
         }
         else return []
     }
 
     const handleSubmitExpert = (values: number[]) => {
-            console.log(values)
             setThemeExpert(values)
             
             //values.map((valueD) => register(`themesIdExpert.${valueD}`, {value: valueD}))
         }
 
         const handleSubmitInterested = (values: number[]) => {
-            console.log(values)
             setThemeInterested(values)
             
             //values.map((valueD) => register(`themesIdExpert.${valueD}`, {value: valueD}))
         }
 
-    const defaultForInterested = () => {
-        if(changedMode===true){
-            try{
-                if(user!==undefined){
-                    const defalt = users?.filter(userD => userD.id === user?.id)[0].experts?.map((expert) => themes?.filter((el) => el.name===expert[0])[0].id).flat()
-                    console.log(defalt)
-                    return defalt
-                }
-            }catch(err){
-                console.error(err)
-                return []
-            }
-        }
-        else return []
-    }
+    
     // const defaultForInterested = (themeElem: ThemeFromServerT) => {
     //     if(changedMode===true){
     //     const defalt = users.filter(userD => userD.id === user?.id)[0].interests.map((interested) => interested[0]).flat().includes(themeElem.name)
@@ -98,8 +99,9 @@ export const ThemesShow = () => {
     // }
 
     const navigate = useNavigate();
-    const onSubmit = async(data: GetId) => {
+    const onSubmit = async() => {
         //console.log(data)
+        console.log(themeExpert, themeInterested)
         const response = await Connect.axiosStayExpertOrInterested(
             { 
                 changeMode: changedMode,
