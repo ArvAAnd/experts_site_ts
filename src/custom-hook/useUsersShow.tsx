@@ -39,7 +39,7 @@ export const useUsersShow = () => {
   
     useEffect(() => {
       get_users()
-    },[themesUpdate])
+    },[])
   
   
     return {user, signIn, signOut, users}

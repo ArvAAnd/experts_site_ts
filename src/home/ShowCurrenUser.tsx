@@ -22,12 +22,13 @@ export const ShowCurrenUser = () => {
                 Welcome, {user.name}!
                 </h1>
                 <div className="user-expert">Experts:
-                    {user.experts?.map((expert) => {
+                    {user.experts?.length != undefined ? user.experts?.map((expert) => {
                         return <p key={expert.name} className="users-element-line">{expert.name}</p>
-                    })}
+                    })
+                : <p>U are not expert in any theme </p>}
                 </div>
                 <div className="user-expert">Interested:
-                    {user.interests?.map((interested) => {
+                    {user.interests?.length != undefined && <p></p> && user.interests?.map((interested) => {
                         return <p key={interested.name} className="users-element-line">{interested.name}</p>
                     })}
                 </div>

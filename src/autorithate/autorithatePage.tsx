@@ -25,9 +25,7 @@ export const Autorithation = () => {
 
     const onSubmit = async(data: UserRegistrationT) => {
         try{
-            console.log(data)
             const response = await Connect.axiosAuthorization(data)
-            console.log(response.data)
             signIn({...response.data})
             goBack()
         }catch{
