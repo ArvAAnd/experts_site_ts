@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/experts_site_ts/static/css/main.409baf6a.css",
+    "main.js": "/experts_site_ts/static/js/main.b5d021ae.js",
+    "index.html": "/experts_site_ts/index.html",
+    "main.409baf6a.css.map": "/experts_site_ts/static/css/main.409baf6a.css.map",
+    "main.b5d021ae.js.map": "/experts_site_ts/static/js/main.b5d021ae.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.409baf6a.css",
+    "static/js/main.b5d021ae.js"
+  ]
+}
