@@ -47,6 +47,8 @@ export const useThemesShow = () => {
         const defaltInteres = user?.interests?.map((interested) => interested.id).flat()
         if(defaltInteres) setThemeInterested(defaltInteres)
     }, [])
+
+    
     const defaultForExpert = () => {
         if(changedMode===true){
             const defalt = user?.experts?.map((expert) => expert.id).flat()
@@ -80,6 +82,7 @@ export const useThemesShow = () => {
                 themesIdInterested: themeInterested
             }
         )
+        console.log({...user, experts:response.data.experts, interests:response.data.interesteds})
         if(user!==null) signIn({...user, experts:response.data.experts, interests:response.data.interesteds})
         //console.log(response.data)
         reset()

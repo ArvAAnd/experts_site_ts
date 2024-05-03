@@ -6,7 +6,7 @@ import { useThemesShow } from '../custom-hook/useThemesShow';
 
 export const ThemesShow = () => {
     const {handleSubmit, onSubmit, handleSubmitExpert, handleSubmitInterested, options, defaultForExpert, defaultForInterested} = useThemesShow();
-
+    
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
            <h1>Themes</h1>
