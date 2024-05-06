@@ -26,7 +26,8 @@ export const Autorithation = () => {
     const onSubmit = async(data: UserRegistrationT) => {
         try{
             const response = await Connect.axiosAuthorization(data)
-            signIn({...response.data})
+            signIn({...response.data.data})
+            document.cookie = JSON.stringify(response.data.tocken) + "=" + response.data.data.id + "; path=/"
             goBack()
         }catch{
             alert("Can't to autorizate")

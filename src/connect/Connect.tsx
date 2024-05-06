@@ -40,5 +40,10 @@ export const Connect = {
         return axios.post('http://127.0.0.1:5000/authorization', {
             'data': data
         })
+    },
+    async axiosPostToken(data: number) {
+        return axios.post('http://127.0.0.1:5000/read_token', {
+            'id': data
+        })        
     }
 };

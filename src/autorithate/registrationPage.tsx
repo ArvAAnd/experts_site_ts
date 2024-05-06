@@ -7,7 +7,6 @@ import {useUserStore} from "../store/userStore"
 import { routes } from "../Routers"
 import { Connect } from "../connect/Connect"
 import { useThemesUpdateStore } from "../store/themeUpdateStore"
-import { useTokenStore } from "../store/tokenStore"
 
 export const useRegistration = () => {
   const {
@@ -15,30 +14,19 @@ export const useRegistration = () => {
     handleSubmit,
     reset
   }= useForm<UserT>()
-  const {token, setToken} = useTokenStore()
   const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
 
   const {user, signIn} = useUserStore()
   const navigate = useNavigate()
 
-  const setCookie = (name: string, val: string) => {
-    const date = new Date();
-    const value = val;
-
-    // Set it expire in 7 days
-    date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
-
-    // Set it
-    document.cookie = name+"="+value+"; expires="+date.toUTCString()+"; path=/";
-}
-function getCookie(name: string) {
-  const value = "; " + document.cookie;
-  const parts = value.split("; " + name + "=");
-  
-  if (parts.length == 2) {
-      return parts.pop()?.split(";").shift();
+  function getCookie(name: string) {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+    
+    if (parts.length == 2) {
+        return parts.pop()?.split(";").shift();
+    }
   }
-}
 
   const goBack = () => {
     navigate(routes.home)
@@ -51,9 +39,8 @@ function getCookie(name: string) {
       if(response.data.massage != "Nevdalo") {
         //console.log(response.data)
         signIn({...response.data.data})
-        setToken(response.data.tocken)
-        setCookie(JSON.stringify(response.data.tocken), JSON.stringify(response.data.data))
-        console.log(getCookie(JSON.stringify(response.data.tocken)))
+        document.cookie = JSON.stringify(response.data.tocken) + "=" + response.data.data.id + "; path=/"
+        console.log(getCookie(response.data.tocken))
         //console.log(response.data)    
         navigate(routes.pick_theme)
       } 

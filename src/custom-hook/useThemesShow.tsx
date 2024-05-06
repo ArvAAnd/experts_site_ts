@@ -12,6 +12,7 @@ import { useUsersShow } from "../custom-hook/useUsersShow";
 import { useUsersStore } from "../store/usersStore";
 import { Select, Space } from 'antd';
 import type { SelectProps } from 'antd';
+import axios from "axios";
 type GetId = {
     themesIdExpert: number[],
     themesIdInterested: number[],
@@ -31,6 +32,7 @@ export const useThemesShow = () => {
         getValues
     } = useForm<GetId>();
 
+    
     const options: SelectProps['options'] = [];
     try{
         themes?.map((themeElem) => {
@@ -40,6 +42,8 @@ export const useThemesShow = () => {
         })}catch{
             console.log("Error")
         }
+
+    
     useEffect(() => {
         const defaltExpert = user?.experts?.map((expert) => expert.id).flat()
         if(defaltExpert) setThemeExpert(defaltExpert)
