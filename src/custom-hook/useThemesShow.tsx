@@ -91,7 +91,7 @@ export const useThemesShow = () => {
         //console.log(response.data)
         reset()
         setThemesUpdate(!themesUpdate)
-        navigate(routes.home)
+        navigate(routes.current_user_page)
     }
 
     return {handleSubmit, onSubmit, handleSubmitExpert, handleSubmitInterested, options, defaultForExpert, defaultForInterested}

@@ -45,5 +45,8 @@ export const Connect = {
         return axios.post('http://127.0.0.1:5000/read_token', {
             'id': data
         })        
+    },
+    async axiosGetUserById(user_id: number) {
+        return axios.get(`http://127.0.0.1:5000/one_user/${user_id}`)
     }
 };

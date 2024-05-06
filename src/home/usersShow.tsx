@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { useUsersStore } from "../store/usersStore";
 import { useThemesUpdateStore } from "../store/themeUpdateStore";
+import { useNavigate } from "react-router";
+import { routes } from "../Routers";
+import { Link } from "react-router-dom";
 
 export const UsersShow = () => {
     const {users} = useUsersStore();
     const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
-    
+    const navigate = useNavigate();
     
     
     return(
@@ -23,6 +26,7 @@ export const UsersShow = () => {
                     { userD?.interests?.length > 0 && userD.interests.map((interested) => {
                         return <p key={interested.name} className="users-element-line">{interested.name}</p>
                     })}
+                    <Link to={`/user_page/${userD.id}`}>View profile</Link>
                 </div>
             })}
       </div>

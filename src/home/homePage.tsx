@@ -14,7 +14,7 @@ import { AddTheme } from "../autorithate/AddTheme";
 
 
 export const Home = () => {
-  
+  const {user} = useUserStore();
   //const [addTheme, setAddTheme] = useState(false)
   return(
     <div>
@@ -22,8 +22,7 @@ export const Home = () => {
         <ShowCurrenUser />
         <UsersShow />
       </div>
-      
-      <AddTheme />
+      {user?.name==="admin" && <AddTheme />}
     </div>
   )
 }
