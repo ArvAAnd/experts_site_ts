@@ -48,5 +48,10 @@ export const Connect = {
     },
     async axiosGetUserById(user_id: number) {
         return axios.get(`http://127.0.0.1:5000/one_user/${user_id}`)
+    },
+    async axiosGetUserByExpert(theme_id: number[] | undefined) {
+        return axios.post('http://127.0.0.1:5000/get_users_by_interested', {
+            'idTheme': theme_id
+        })
     }
 };

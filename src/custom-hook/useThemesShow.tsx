@@ -8,9 +8,6 @@ import { useThemesUpdateStore } from "../store/themeUpdateStore";
 import { useNavigate } from "react-router";
 import { routes } from "../Routers";
 import { useChangedModeStore } from "../store/changedMode";
-import { useUsersShow } from "../custom-hook/useUsersShow";
-import { useUsersStore } from "../store/usersStore";
-import { Select, Space } from 'antd';
 import type { SelectProps } from 'antd';
 import axios from "axios";
 type GetId = {
@@ -22,7 +19,6 @@ export const useThemesShow = () => {
     const {user, signIn} = useUserStore();
     const {changedMode} = useChangedModeStore();
     const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
-    const {users} = useUsersShow();
     const [themeExpert, setThemeExpert] = useState<number[]>([]);
     const [themeInterested, setThemeInterested] = useState<number[]>([]);
     const {

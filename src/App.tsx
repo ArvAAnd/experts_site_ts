@@ -3,9 +3,11 @@ import './App.css';
 import { Router } from './Routers';
 import { Connect } from './connect/Connect';
 import { useUserStore } from './store/userStore';
+import { useThemesUpdateStore } from './store/themeUpdateStore';
 
 function App() {
   const {signIn} = useUserStore()
+  const {themesUpdate, setThemesUpdate} = useThemesUpdateStore()
   function getCookie() {
     const value = document.cookie;
     const parts = value.split(";");
@@ -16,6 +18,7 @@ function App() {
   const getRespCookie = async () => {
     const response = await Connect.axiosPostToken(Number(getCookie()))
     signIn({...response.data})
+    setThemesUpdate(!themesUpdate)
     //console.log(response)
   }
 

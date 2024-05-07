@@ -5,33 +5,45 @@ import { UserFromServerT, UserT } from "../types/user";
 import { useUsersStore } from "../store/usersStore";
 import { UsersShow } from "../home/usersShow";
 import { useThemesUpdateStore } from "../store/themeUpdateStore";
+import { useForm } from "react-hook-form";
+import { SelectProps } from "antd";
+import { useThemesGet } from "./useThemesGet";
 
 
 export const useUsersShow = () => {
     const {signOut, user, signIn} = useUserStore();
     const {users, setUsers} = useUsersStore()
     const {themesUpdate} = useThemesUpdateStore();
-    // const stayC = () => {
-    //   user ? (
-    //     signIn({...user, "c++":true})
-    //     ) : alert("")
-    // }
-  
-  //   const changeC = async() => {
-  //     const {user, signIn} = useUserStore();
-  
-  //     if(user){
-        
-  //       const response = await Connect.axiosUpdate({...users.filter(el => el.name === user.name)[0], "c++":!user["c++"]})  
-  //       console.log(response.data.message)  
-  //       console.log({...users.filter(el => el.name === user.name)[0], "c++":!user["c++"]})
-  //       setChanged(chanhed => !chanhed)
-  //     }
-  // }
-    
-  
+    const [search, setSearch] = useState<number[]>()
+    const {themes} = useThemesGet();
+    const {
+      register,
+      handleSubmit,
+    } = useForm()
+
+    const options: SelectProps['options'] = [];
+    try{
+        themes?.map((themeElem) => {
+            if(themeElem.name !== undefined){
+            options.push({ label: themeElem.name, value: themeElem.id })
+        }
+        })}catch{
+            console.log("Error")
+        }
+
+    const handleSubmitSearch = (values: number[]) => {
+        setSearch(values)
+      }
+    const onSubmitSearch = async() => {
+      const response = await Connect.axiosGetUserByExpert(search)
+      setUsers(response.data)
+    }
+
     const get_users = async() => {
-      const response = await Connect.axiosGetUser()
+      //const response = await Connect.axiosGetUser()
+      const response = await Connect.axiosGetUserByExpert(user?.interests?.map((interested) => interested.id).flat())
+      //console.log(user)
+      //console.log(response.data[0])
       //response.data.map((user: UserFromServerT) => {console.log(user)})
       //console.log(response.data[1].experts[0])
       setUsers(response.data)
@@ -39,9 +51,9 @@ export const useUsersShow = () => {
   
     useEffect(() => {
       get_users()
-    },[])
+    },[themesUpdate,])
   
   
-    return {user, signIn, signOut, users}
+    return {user, signIn, signOut, users, onSubmitSearch, handleSubmit, options, handleSubmitSearch}
   }
   

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { useUsersShow } from "../custom-hook/useUsersShow";
 import { Link } from "react-router-dom";
 import { routes } from "../Routers";
 import { useThemesUpdateStore } from "../store/themeUpdateStore";
 import { useChangedModeStore } from "../store/changedMode";
 import { Connect } from "../connect/Connect";
+import { useUserStore } from "../store/userStore";
 
 export const ShowCurrenUser = () => {
-    const {user, signIn, signOut, users} = useUsersShow();
-    const {themesUpdate} = useThemesUpdateStore();
+    const {user, signOut} = useUserStore();
+    const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
     const {changedMode, setChangedMode} = useChangedModeStore();
     
     function deleteCookie() {
@@ -22,6 +22,7 @@ export const ShowCurrenUser = () => {
         signOut();
         deleteCookie()//delete cookie 
         setChangedMode(false)
+        setThemesUpdate(!themesUpdate)
         }
 
     return (

@@ -5,7 +5,6 @@ import { useUserStore } from "../store/userStore";
 import { useNavigate } from "react-router";
 import { routes } from "../Routers";
 import { useUsersStore } from "../store/usersStore";
-import { useUsersShow } from "../custom-hook/useUsersShow";
 import { Connect } from "../connect/Connect";
 
 export const Autorithation = () => {
@@ -15,7 +14,6 @@ export const Autorithation = () => {
         reset
     } = useForm<UserT>()
 
-    const {users} = useUsersShow()
     const {user, signIn} = useUserStore()
     const navigate = useNavigate()
 

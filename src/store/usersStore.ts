@@ -2,11 +2,12 @@ import {create} from "zustand";
 import { UserFromServerT } from "../types/user";
 
 type State = {
-    users: UserFromServerT[]
+    users: UserFromServerT[][]
 }
 
+
 type Actions = {
-    setUsers: (users: UserFromServerT[]) => void
+    setUsers: (users: UserFromServerT[][]) => void
 }
 
 export const useUsersStore = create<State & Actions>((set) => ({
