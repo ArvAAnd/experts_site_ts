@@ -9,9 +9,15 @@ import { useChangedModeStore } from "../store/changedMode";
 
 export const CurrentUserPage = () => {
     const navigate = useNavigate()
-    const {user} = useUserStore();
+    const {user, signOut} = useUserStore();
     const {changedMode, setChangedMode} = useChangedModeStore();
     
+    const deleteUser = async() => {
+        await Connect.axiosDelete(user!.id)
+        signOut()
+        navigate(routes.home)
+    }
+
     return <div>
         {user && <div>
             <p>Name: {user.name}</p>
@@ -29,7 +35,7 @@ export const CurrentUserPage = () => {
             </div>
             <Link to={routes.pick_theme} onClick={() => setChangedMode(true)}>To pick theme</Link>
             <></>
-            <button onClick={() => Connect.axiosDelete(user.id)}>Delete my account</button>
+            <button onClick={deleteUser}>Delete my account</button>
         </div>}
         <button onClick={()=>navigate(routes.home)}>Back to home</button>
         </div>

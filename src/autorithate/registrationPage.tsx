@@ -40,7 +40,7 @@ export const useRegistration = () => {
         //console.log(response.data)
         signIn({...response.data.data})
         document.cookie = JSON.stringify(response.data.tocken) + "=" + response.data.data.id + "; path=/"
-        console.log(getCookie(response.data.tocken))
+        //console.log(getCookie(response.data.tocken))
         //console.log(response.data)    
         navigate(routes.pick_theme)
       } 

@@ -82,7 +82,7 @@ export const useThemesShow = () => {
                 themesIdInterested: themeInterested
             }
         )
-        console.log({...user, experts:response.data.experts, interests:response.data.interesteds})
+        //console.log({...user, experts:response.data.experts, interests:response.data.interesteds})
         if(user!==null) signIn({...user, experts:response.data.experts, interests:response.data.interesteds})
         //console.log(response.data)
         reset()

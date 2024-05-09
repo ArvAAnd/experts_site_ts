@@ -37,6 +37,7 @@ export const useUsersShow = () => {
     const onSubmitSearch = async() => {
       const response = await Connect.axiosGetUserByExpert(search)
       setUsers(response.data)
+      //console.log(search)
     }
 
     const get_users = async() => {
