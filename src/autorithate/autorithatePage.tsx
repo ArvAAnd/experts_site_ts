@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { UserRegistrationT, UserT } from "../types/user";
+import { UserAuthorizationT, UserRegistrationT, UserT } from "../types/user";
 import { useUserStore } from "../store/userStore";
 import { useNavigate } from "react-router";
 import { routes } from "../Routers";
@@ -12,7 +12,7 @@ export const Autorithation = () => {
         register,
         handleSubmit,
         reset
-    } = useForm<UserT>()
+    } = useForm<UserAuthorizationT>()
 
     const {user, signIn} = useUserStore()
     const navigate = useNavigate()
@@ -21,7 +21,7 @@ export const Autorithation = () => {
         navigate(routes.home)
     }
 
-    const onSubmit = async(data: UserRegistrationT) => {
+    const onSubmit = async(data: UserAuthorizationT) => {
         try{
             const response = await Connect.axiosAuthorization(data)
             signIn({...response.data.data})

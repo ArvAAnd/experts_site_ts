@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
-import { ExpertAndInterestedForServerT, Theme, UserAndTheme, UserAndThemeForServerT, UserRegistrationT, UserT } from "../types/user";
+import { ExpertAndInterestedForServerT, Theme, UserAndTheme, UserAndThemeForServerT, UserAuthorizationT, UserRegistrationT, UserT } from "../types/user";
 const url = 'http://127.0.0.1:5000/api/registration'
 //const testUrl = 'https://httpbin.org/post'
 
 export const Connect = {
-    async axiosAddUser(data: UserT) {
+    async axiosAddUser(data: UserRegistrationT) {
         return axios.post(url, {
             'data': data
         });
@@ -36,7 +36,7 @@ export const Connect = {
             'data': data
         });
     },
-    async axiosAuthorization(data: UserRegistrationT) {
+    async axiosAuthorization(data: UserAuthorizationT) {
         return axios.post('http://127.0.0.1:5000/authorization', {
             'data': data
         })

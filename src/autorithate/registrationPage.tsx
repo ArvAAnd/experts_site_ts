@@ -1,21 +1,26 @@
-import React, { useState } from "react"
+import React, { useState, ChangeEvent } from "react"
 import "./registrationPage"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
-import { UserT } from "../types/user"
+import { UserRegistrationT, UserT } from "../types/user"
 import {useUserStore} from "../store/userStore"
 import { routes } from "../Routers"
 import { Connect } from "../connect/Connect"
 import { useThemesUpdateStore } from "../store/themeUpdateStore"
+import { gmailPattern } from "../check pattern/GmailPattern"
 
 export const useRegistration = () => {
   const {
     register,
     handleSubmit,
-    reset
-  }= useForm<UserT>()
+    reset,
+    formState: { errors }
+  }= useForm<UserRegistrationT>({
+    mode: 'onChange'
+  })
   const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
-
+  const [email, setEmail] = useState('')
+  const [isValidEmail, setIsValidEmail] = useState(false)
   const {user, signIn} = useUserStore()
   const navigate = useNavigate()
 
@@ -28,10 +33,18 @@ export const useRegistration = () => {
     }
   }
 
+  // const handleChangeGmail = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const inputEmail = e.target.value;
+  //   setEmail(inputEmail);
+  //   const isValid = gmailPattern.test(inputEmail);
+  //   setIsValidEmail(isValid);
+  // }
+
   const goBack = () => {
     navigate(routes.home)
   }
-  const onSubmit = async(data: UserT) => {
+  const onSubmit = async(data: UserRegistrationT) => {
+    errors.gmail && console.log(errors.gmail.message)
     try{
       
       const response = await Connect.axiosAddUser({...data})
@@ -42,6 +55,7 @@ export const useRegistration = () => {
         document.cookie = JSON.stringify(response.data.tocken) + "=" + response.data.data.id + "; path=/"
         //console.log(getCookie(response.data.tocken))
         //console.log(response.data)    
+        setThemesUpdate(!themesUpdate)
         navigate(routes.pick_theme)
       } 
       else alert("Users with this name already exist") 
@@ -52,11 +66,11 @@ export const useRegistration = () => {
       alert("Can't to registrate")
     }finally{}
   }
-  return {onSubmit, register, reset, handleSubmit, goBack}
+  return {errors, onSubmit, register, reset, handleSubmit, goBack}
 }
 
 export function Registration(){
-    const {onSubmit, register, reset, handleSubmit, goBack} = useRegistration()
+    const {errors, onSubmit, register, reset, handleSubmit, goBack} = useRegistration()
     return(
         <div className="main">
         <form onSubmit={handleSubmit(onSubmit)} className="allInputLines">
@@ -76,6 +90,18 @@ export function Registration(){
             {...register('password', {required: 'Password is required'})}
           />
           
+        </div>
+        <div className="inputLine">
+          <p>Gmail</p>
+          <input
+            placeholder="test@gmail.com"
+            type="text" 
+            {...register('gmail', {required: true, pattern: {
+                value: gmailPattern, 
+                message: 'Gmail is not valid', 
+              }})
+            }/>
+          {errors.gmail?.message && <p>{errors.gmail.message}</p>}
         </div>
         <input type="submit" value="Autorizate"/>
       </form>

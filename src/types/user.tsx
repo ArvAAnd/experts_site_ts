@@ -14,6 +14,12 @@ export type UserT = {
 
 export type UserRegistrationT = {
     name: string,
+    password: string,
+    gmail: string
+}
+
+export type UserAuthorizationT = {
+    name: string,
     password: string
 }
 
