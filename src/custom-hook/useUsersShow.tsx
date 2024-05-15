@@ -43,8 +43,8 @@ export const useUsersShow = () => {
     const get_users = async() => {
       //const response = await Connect.axiosGetUser()
       const response = await Connect.axiosGetUserByExpert(user?.interests?.map((interested) => interested.id).flat())
-      //console.log(user)
-      //console.log(response.data[0])
+      //console.log(user?.interests?.map((interested) => interested.id).flat())
+      console.log(response.data)
       //response.data.map((user: UserFromServerT) => {console.log(user)})
       //console.log(response.data[1].experts[0])
       setUsers(response.data)
