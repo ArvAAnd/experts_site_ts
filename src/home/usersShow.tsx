@@ -39,7 +39,7 @@ export const UsersShow = () => {
                         { userD?.interests?.length > 0 && userD.interests.map((interested) => {
                             return <p key={interested.name} className="users-element-line">{interested.name}</p>
                         })} */}
-                        <Link to={`/user_page/${userD.id}`}>View profile</Link>
+                        <Link to={`/experts_site_ts/user_page/${userD.id}`}>View profile</Link>
                     </div>
                     })
                 })

@@ -26,7 +26,7 @@ export type UserAuthorizationT = {
 export type UserFromServerT = {
     id: number,
     name: string,
-    password: string,
+    //password: string,
     experts: {
         id: number,
         name: string

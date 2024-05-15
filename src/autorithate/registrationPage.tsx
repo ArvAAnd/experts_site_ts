@@ -77,7 +77,7 @@ export function Registration(){
         <div className="inputLine">
           <p>Name</p>
           <input 
-            placeholder="Arsen" 
+            placeholder="Maik Vathovskiy" 
             type="text"
             {...register('name', {required: 'name is required'})}
           />

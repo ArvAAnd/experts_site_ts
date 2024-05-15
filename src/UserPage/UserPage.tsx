@@ -11,6 +11,7 @@ export const UserPage = () => {
 
     const getUserById = async() => {
         const response = await Connect.axiosGetUserById(Number(id))
+        console.log(response.data)
         setUserPicked({...response.data})
     }
 

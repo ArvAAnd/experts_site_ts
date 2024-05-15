@@ -1,7 +1,7 @@
 {
   "name": "experts_site_ts",
   "version": "0.1.0",
-  "homepage": "https://arvaand.github.io/experts_site_ts",
+  "homepage": "https://arvaand.github.io/experts_site_ts/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
