@@ -3,7 +3,7 @@ import { Route, Routes, createBrowserRouter, createRoutesFromElements } from "re
 import { Home } from "./home/homePage";
 import { Registration } from "./autorithate/registrationPage";
 import { Autorithation } from "./autorithate/autorithatePage";
-import { ThemesShow } from "./home/ThemesShow";
+import { ThemesShow } from "./autorithate/ThemesShow";
 import { UserPage } from "./UserPage/UserPage";
 import { CurrentUserPage } from "./UserPage/CurrentUserPage";
 import App from "./App";

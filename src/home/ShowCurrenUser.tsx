@@ -33,7 +33,7 @@ export const ShowCurrenUser = () => {
                 </h1>
                 <div className="user-expert">Experts:
                     {user.experts?.length != 0 ? user.experts?.map((expert) => {
-                        console.log(expert)
+                        //console.log(expert)
                         return <p key={expert.name} className="users-element-line">{expert.name}</p>
                     })
                 : <p>U are not expert in any theme </p>}

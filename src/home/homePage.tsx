@@ -7,7 +7,7 @@ import { Connect } from "../connect/Connect";
 import { UserFromServerT, UserT } from "../types/user";
 import { useUsersStore } from "../store/usersStore";
 import { UsersShow } from "./usersShow";
-import { ThemesShow} from '../home/ThemesShow'
+import { ThemesShow} from '../autorithate/ThemesShow'
 import { ShowCurrenUser } from "./ShowCurrenUser";
 import "./home.css";
 import { AddTheme } from "../autorithate/AddTheme";

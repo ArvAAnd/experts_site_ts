@@ -33,6 +33,15 @@ export const CurrentUserPage = () => {
                     return <p key={interested.id}>{interested.name}</p>
                 })}
             </div>
+            {user.contacts !== '' ? 
+                <>
+                <p>Contacts:</p>
+                <div>
+                    <p>{user.contacts}</p>
+                </div>
+                </>
+                : null
+            } 
             <Link to={routes.pick_theme} onClick={() => setChangedMode(true)}>To pick theme</Link>
             <></>
             <button onClick={deleteUser}>Delete my account</button>

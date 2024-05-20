@@ -23,7 +23,9 @@ export const useUserStore = create<StoreType>((set) => ({
         name: '',
         password: '',
         experts: [],
-        interests: []
+        interests: [],
+        contacts: '',
+        rating: 0
     },
     loading:false,
     // startLoading:() => set((state) => ({...state,loading:true})),

@@ -11,8 +11,7 @@ import { useChangedModeStore } from "../store/changedMode";
 import type { SelectProps } from 'antd';
 import axios from "axios";
 type GetId = {
-    themesIdExpert: number[],
-    themesIdInterested: number[],
+    contacts: string
 }
 export const useThemesShow = () => {
     const {themes} = useThemesGet();
@@ -38,7 +37,7 @@ export const useThemesShow = () => {
         })}catch{
             console.log("Error")
         }
-
+    
     
     useEffect(() => {
         const defaltExpert = user?.experts?.map((expert) => expert.id).flat()
@@ -72,23 +71,27 @@ export const useThemesShow = () => {
         }
 
     const navigate = useNavigate();
-    const onSubmit = async() => {
+    const onSubmit = async(data: GetId) => {
         //console.log(themeExpert, themeInterested)
         const response = await Connect.axiosStayExpertOrInterested(
             { 
                 changeMode: changedMode,
                 user_id: user ? user.id : 0, 
                 themesIdExpert: themeExpert,
-                themesIdInterested: themeInterested
+                themesIdInterested: themeInterested,
+                contacts: data.contacts
             }
         )
         //console.log({...user, experts:response.data.experts, interests:response.data.interesteds})
-        if(user!==null) signIn({...user, experts:response.data.experts, interests:response.data.interesteds})
+        if(user!==null) signIn({...user, 
+            experts:response.data.experts, 
+            interests:response.data.interesteds, 
+            contacts: data.contacts})
         //console.log(response.data)
         reset()
         setThemesUpdate(!themesUpdate)
         navigate(routes.current_user_page)
     }
 
-    return {handleSubmit, onSubmit, handleSubmitExpert, handleSubmitInterested, options, defaultForExpert, defaultForInterested}
+    return {user, register, handleSubmit, onSubmit, handleSubmitExpert, handleSubmitInterested, options, defaultForExpert, defaultForInterested, themeExpert}
 }

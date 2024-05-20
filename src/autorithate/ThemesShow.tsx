@@ -2,10 +2,11 @@ import React from 'react';
 import { Select, Space } from 'antd';
 import type { SelectProps } from 'antd';
 import { useThemesShow } from '../custom-hook/useThemesShow';
+import userEvent from '@testing-library/user-event';
 
 
 export const ThemesShow = () => {
-    const {handleSubmit, onSubmit, handleSubmitExpert, handleSubmitInterested, options, defaultForExpert, defaultForInterested} = useThemesShow();
+    const {user, register, themeExpert, handleSubmit, onSubmit, handleSubmitExpert, handleSubmitInterested, options, defaultForExpert, defaultForInterested} = useThemesShow();
     
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -20,6 +21,16 @@ export const ThemesShow = () => {
                 defaultValue={defaultForExpert()}
                 options={options}
                 />
+            {
+            user?.contacts === '' ?
+                themeExpert.length > 0 ? 
+                 <input {...register('contacts', {required: 'contacts is required'})} type="text" placeholder='Telegram: @username'/>
+                : null
+            :
+                themeExpert.length > 0 ? 
+                <input {...register('contacts', {required: 'contacts is required'})} type="text" placeholder='Telegram: @username' defaultValue={user?.contacts}/>
+                : null
+            }
             <p>Interested themes:</p>
             <Select
                 mode="multiple"

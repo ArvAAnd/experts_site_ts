@@ -28,7 +28,7 @@ export const UsersShow = () => {
                 {user?.name ? (users.length > 0 ? users?.map((userE) => {
                     return userE?.map((userD) => {
                         return <div className="users-element" key={userD.id}>
-                        <p className="users-element-line">Key: {userD.id}</p>
+                        {/* <p className="users-element-line">Key: {userD.id}</p> */}
                         <p className="users-element-line">Name: {userD.name}</p>
                         {/* <p className="users-element-line">Password: {userD.password}</p> */}
                         {userD?.experts?.length > 0 && <p className="users-element-line">Experts:</p>}
@@ -39,6 +39,7 @@ export const UsersShow = () => {
                         { userD?.interests?.length > 0 && userD.interests.map((interested) => {
                             return <p key={interested.name} className="users-element-line">{interested.name}</p>
                         })} */}
+                        <p>Raiting: {userD?.rating}</p>
                         <Link to={`/experts_site_ts/user_page/${userD.id}`}>View profile</Link>
                     </div>
                     })

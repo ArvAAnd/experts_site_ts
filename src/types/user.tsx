@@ -9,7 +9,9 @@ export type UserT = {
     interests: {
         id: number,
         name: string
-    }[] | null
+    }[] | null,
+    contacts: string,
+    rating: number
 }
 
 export type UserRegistrationT = {
@@ -34,7 +36,8 @@ export type UserFromServerT = {
     interests: {
         id: number,
         name: string
-    }[]
+    }[],
+    rating: number
 }
 
 export type UserAndTheme = {
@@ -61,5 +64,12 @@ export type ExpertAndInterestedForServerT = {
     changeMode: boolean,
     user_id: number,
     themesIdExpert: number[],
-    themesIdInterested: number[]
+    themesIdInterested: number[],
+    contacts: string
+}
+
+export type GiveRating = {
+    idUserRating: number,
+    idUserRated: number,
+    rating: number
 }
