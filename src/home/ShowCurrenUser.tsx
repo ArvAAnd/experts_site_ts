@@ -1,29 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { routes } from "../Routers";
-import { useThemesUpdateStore } from "../store/themeUpdateStore";
-import { useChangedModeStore } from "../store/changedMode";
-import { Connect } from "../connect/Connect";
-import { useUserStore } from "../store/userStore";
+import { useShowCurrentUser } from "../custom-hook/useShowCurrenUser";
+
 
 export const ShowCurrenUser = () => {
-    const {user, signOut} = useUserStore();
-    const {themesUpdate, setThemesUpdate} = useThemesUpdateStore();
-    const {changedMode, setChangedMode} = useChangedModeStore();
-    
-    function deleteCookie() {
-        const value = document.cookie;
-        const parts = value.split("=");
-        //console.log(parts[0] + "    " + parts[1]);
-        document.cookie = parts[0] + "=; max-age=-1; path=/;";
-    }
-    
-    const Logout = ()=> {
-        signOut();
-        deleteCookie()//delete cookie 
-        setChangedMode(false)
-        setThemesUpdate(!themesUpdate)
-        }
+    const {user, Logout} = useShowCurrentUser();    
 
     return (
         <div className="user-status">

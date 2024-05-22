@@ -11,9 +11,9 @@ export const Connect = {
             'data': data
         });
     },
-    async axiosGetUser() {
-        return axios.get(`${server}/get_users`);
-    },
+    // async axiosGetUser() {
+    //     return axios.get(`${server}/get_users`);
+    // },
     async axiosDelete(user_id: number) {
         return axios.delete(`${server}/api/delete/${user_id}`,
         );
@@ -42,9 +42,9 @@ export const Connect = {
             'data': data
         })
     },
-    async axiosPostToken(data: number) {
+    async axiosPostToken(data: string) {
         return axios.post(`${server}/read_token`, {
-            'id': data
+            'tocken': data
         })        
     },
     async axiosGetUserById(user_id: number) {
@@ -63,6 +63,11 @@ export const Connect = {
     async axiosGiveRating(data: GiveRating){
         return axios.post(`${server}/give-rating`, {
             'data': data
+        })
+    },
+    async axiosDeleteToken(data: string) {
+        return axios.post(`${server}/delete-token`, {
+            'tocken': data
         })
     }
 };

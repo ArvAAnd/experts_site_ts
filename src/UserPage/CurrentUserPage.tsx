@@ -6,6 +6,7 @@ import { UserT } from "../types/user";
 import { useUserStore } from "../store/userStore";
 import { Link } from "react-router-dom";
 import { useChangedModeStore } from "../store/changedMode";
+import Cookies from "js-cookie";
 
 export const CurrentUserPage = () => {
     const navigate = useNavigate()
@@ -15,6 +16,7 @@ export const CurrentUserPage = () => {
     const deleteUser = async() => {
         await Connect.axiosDelete(user!.id)
         signOut()
+        Cookies.remove('token')
         navigate(routes.home)
     }
 

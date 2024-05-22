@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 import { Home } from "./home/homePage";
 import { Registration } from "./autorithate/registrationPage";
-import { Autorithation } from "./autorithate/autorithatePage";
+import { Autorithation } from "./autorithate/LogInPage";
 import { ThemesShow } from "./autorithate/ThemesShow";
 import { UserPage } from "./UserPage/UserPage";
 import { CurrentUserPage } from "./UserPage/CurrentUserPage";

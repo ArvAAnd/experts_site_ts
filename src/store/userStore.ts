@@ -11,8 +11,8 @@ type Actions = {
     signOut:() => void;
     // setToken:(token:string) => void,
     // setAvatar:(avatar:string) => void,
-    // startLoading:() => void,
-    // stopLoading:() => void,
+    startLoading:() => void,
+    stopLoading:() => void,
     // setActive:() => void
 }
 type StoreType = State & Actions;
@@ -28,8 +28,8 @@ export const useUserStore = create<StoreType>((set) => ({
         rating: 0
     },
     loading:false,
-    // startLoading:() => set((state) => ({...state,loading:true})),
-    // stopLoading:() => set((state) => ({...state,loading:false})),
+    startLoading:() => set((state) => ({...state,loading:true})),
+    stopLoading:() => set((state) => ({...state,loading:false})),
     signIn: (userData) => set((state) => ({ ...state,user:{...state.user,...userData} })),
     signOut: () => set(() => ({
         user:null,

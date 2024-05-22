@@ -11,14 +11,18 @@ import { ThemesShow} from '../autorithate/ThemesShow'
 import { ShowCurrenUser } from "./ShowCurrenUser";
 import "./home.css";
 import { AddTheme } from "../autorithate/AddTheme";
+import { useAuth } from "../custom-hook/useAuth";
+
 
 
 export const Home = () => {
   const {user} = useUserStore();
+  //const {user} = useAuth();
   //const [addTheme, setAddTheme] = useState(false)
   return(
     <div>
       <div>
+        
         <ShowCurrenUser />
         <UsersShow />
       </div>
