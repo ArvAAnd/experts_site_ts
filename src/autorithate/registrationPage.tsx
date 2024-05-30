@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react"
-import "./registrationPage"
+import "./registrationPage.css"
 import { gmailPattern } from "../check pattern/GmailPattern"
 import { useRegistration } from "../custom-hook/useRegistration"
 

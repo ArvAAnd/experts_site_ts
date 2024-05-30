@@ -40,16 +40,16 @@ export type UserFromServerT = {
     rating: number
 }
 
-export type UserAndTheme = {
-    id: number,
-    user_id: number,
-    theme_id: number
-}
+// export type UserAndTheme = {
+//     id: number,
+//     user_id: number,
+//     theme_id: number
+// }
 
-export type UserAndThemeForServerT = {
-    user_id: number,
-    theme_id: number
-}
+// export type UserAndThemeForServerT = {
+//     user_id: number,
+//     theme_id: number
+// }
 
 export type Theme = {
     name: string

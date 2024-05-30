@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { ExpertAndInterestedForServerT, GiveRating, Theme, UserAndTheme, UserAndThemeForServerT, UserAuthorizationT, UserRegistrationT, UserT } from "../types/user";
+import { ExpertAndInterestedForServerT, GiveRating, Theme, UserAuthorizationT, UserRegistrationT, UserT } from "../types/user";
 const server = 'http://127.0.0.1:5000'
 //const server = 'https://expertssiteback-04981a476ea5.herokuapp.com'
 //const testUrl = 'https://httpbin.org/post'

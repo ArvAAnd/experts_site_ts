@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Connect } from '../connect/Connect';
 import { useUserStore } from '../store/userStore';
 import { useThemesUpdateStore } from '../store/themeUpdateStore';
@@ -9,7 +9,8 @@ import Cookies from 'js-cookie';
 export const useAuth = () => {
     const {user ,signIn} = useUserStore()
     const token = Cookies.get('token')
-    console.log(token)
+    const [loading, setLoading] = useState(true);
+    //const [isSignedIn,setIsSignedIn] = useState(true);
     const {themesUpdate, setThemesUpdate} = useThemesUpdateStore()
     
     const getRespCookie = async () => {
@@ -23,8 +24,8 @@ export const useAuth = () => {
 
     useEffect(() => {
         getRespCookie()
+        setLoading(false)
     },[])
 
-    return {user}
-    //return <>{children}</>
+    return {loading}
 }
