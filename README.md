@@ -24,3 +24,6 @@ The client-side application for the AskExpert platform, a web service designed t
 1. Clone the repository.
 2. Install the necessary packages: `npm install`
 3. Run the application in development mode: `npm start`
+
+## Deploy
+https://arvaand.github.io/experts_site_ts/
